@@ -52,6 +52,16 @@ class HomogeneousBgDetector():
 
         return objects_contours
 
+    def classify(self, height):
+        if height >= 59:
+            return 'Extra Large'
+        elif height >= 57:
+            return 'Large'
+        elif height >= 55:
+            return 'Medium'
+        else:
+            return 'Small'
+
     # def get_objects_rect(self):
     #     box = cv2.boxPoints(rect)  # cv2.boxPoints(rect) for OpenCV 3.x
     #     box = np.int0(box)

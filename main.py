@@ -65,8 +65,18 @@ def upload():
                 if (abs(x - aruco_x) < aruco_w / 2 and abs(y - aruco_y) < aruco_h / 2):
                     continue
                 else:
+                    w_object_real = round(w_object_real, 2)
+                    h_object_real = round(h_object_real, 2)
+                    temp = 0
+
+                    if w_object_real > h_object_real:
+                        temp = w_object_real
+                        w_object_real = h_object_real
+                        h_object_real = temp
+
                     response['width'] = w_object_real
                     response['height'] = h_object_real
+                    response['classification'] = detector.classify(h_object_real)
                     cv2.polylines(image, [box], True, (0, 255, 0), 3)
 
         _, buffer = cv2.imencode('.jpg', image)
